@@ -395,11 +395,11 @@ Fleet management system infrastructure is ready to be deployed! 🎊
 
 ## 📝 License
 
-[Your License Here]
+MIT License
 
 ## 👥 Contributors
 
-[Your Team Information]
+- Bernard Adanlessossi
 
 ---
 
