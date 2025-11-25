@@ -1,0 +1,78 @@
+# terraform.tfvars.example - Configuration Template
+# Copy this file to terraform.tfvars and update with your actual values
+# IMPORTANT: Never commit terraform.tfvars to version control!
+
+# AWS Configuration
+aws_region  = "us-east-1"
+environment = "production"
+
+# VPC Configuration
+vpc_cidr             = "10.0.0.0/16"
+availability_zones   = ["us-east-1a", "us-east-1b", "us-east-1c"]
+public_subnet_cidrs  = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+private_subnet_cidrs = ["10.0.11.0/24", "10.0.12.0/24", "10.0.13.0/24"]
+database_subnet_cidrs = ["10.0.21.0/24", "10.0.22.0/24", "10.0.23.0/24"]
+
+# Database Configuration
+db_name              = "fleetdb"
+db_username          = "fleetadmin"
+db_password          = "CHANGE_ME_STRONG_PASSWORD_HERE_Min16Chars!"
+db_instance_class    = "db.t3.medium"
+db_allocated_storage = 100
+
+# ECS Configuration
+# IMPORTANT: Replace with your actual ECR image URL after pushing to ECR
+api_container_image = "123456789012.dkr.ecr.us-east-1.amazonaws.com/fleet-api:latest"
+ecs_task_cpu        = "512"   # 0.5 vCPU
+ecs_task_memory     = "1024"  # 1 GB RAM
+ecs_desired_count   = 2
+ecs_min_capacity    = 2
+ecs_max_capacity    = 10
+
+# Redis Configuration
+redis_node_type  = "cache.t3.micro"
+redis_num_nodes  = 1  # Set to 2+ for high availability with automatic failover
+
+# SSL Certificate (optional - for HTTPS)
+# Get this from AWS Certificate Manager after requesting a certificate
+# Leave empty "" to use HTTP only (not recommended for production)
+ssl_certificate_arn = ""
+
+# Monitoring
+alarm_email = "alerts@yourcompany.com"
+
+# ====================================
+# Environment-Specific Configurations
+# ====================================
+
+# Development Environment Example:
+# environment = "dev"
+# db_instance_class = "db.t3.micro"
+# db_allocated_storage = 20
+# ecs_desired_count = 1
+# ecs_min_capacity = 1
+# ecs_max_capacity = 2
+# redis_node_type = "cache.t3.micro"
+
+# Staging Environment Example:
+# environment = "staging"
+# db_instance_class = "db.t3.small"
+# db_allocated_storage = 50
+# ecs_desired_count = 2
+# ecs_min_capacity = 1
+# ecs_max_capacity = 5
+
+# Production High-Traffic Example:
+# environment = "production"
+# db_instance_class = "db.r5.large"
+# db_allocated_storage = 500
+# ecs_desired_count = 4
+# ecs_min_capacity = 4
+# ecs_max_capacity = 20
+# redis_node_type = "cache.r5.large"
+# redis_num_nodes = 2
+
+# ================== TO DO =======================
+# After saving, copy this file to terraform.tfvars and update with your actual values:
+# bashcp terraform.tfvars.example terraform.tfvars
+# Then edit terraform.tfvars with your real values
